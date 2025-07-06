@@ -19,8 +19,6 @@ function remote_uploader_custom_upload_dir($dirs) {
     $path = $dirs['path'];
     $url = $dirs['url'];
 
-    if (isset($_GET["log"])) { print "\n"; print_r($dirs); }
-
     if (
         preg_match('#/uploads/20\d{2}/#', $path) &&
         strpos($path, '/elementor/') === false &&

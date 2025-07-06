@@ -30,12 +30,13 @@ function remote_uploader_custom_upload_dir($dirs) {
         return $dirs;
     }
 
-    foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $call) {
-        if (!empty($call['class']) && strpos($call['class'], 'Elementor\\') === 0) {
+    $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+    foreach ($backtrace as $call) {
+        if (!empty($call['class']) && strpos($call['class'], 'Elementor\\Core\\Files\\CSS') === 0) {
             return $dirs;
         }
     }
-
+    
     if (preg_match('#/uploads/20\d{2}/#', $path)) {
         $dirs['url']     = REMOTEUPLOADER_SUBDOMAIN_URL . $subdir;
         $dirs['baseurl'] = REMOTEUPLOADER_SUBDOMAIN_URL;
@@ -43,7 +44,6 @@ function remote_uploader_custom_upload_dir($dirs) {
 
     return $dirs;
 }
-
 
 add_filter('wp_handle_upload', 'remote_uploader_move_to_ftp');
 function remote_uploader_move_to_ftp($upload) {

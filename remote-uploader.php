@@ -12,7 +12,10 @@ add_filter('upload_dir', 'hojrehdar_custom_upload_dir');
 function hojrehdar_custom_upload_dir($dirs) {
     $subdir = $dirs['subdir'];
 
-    if (preg_match('#^/20\d{2}/#', $subdir) && strpos($subdir, 'elementor') === false) {
+    if (
+        preg_match('#/uploads/20\d{2}/#', $path) &&
+        strpos($path, 'elementor') === false
+    ) {
         $dirs['url']     = 'https://dl.hojrehdar.com/uploads' . $subdir;
         $dirs['baseurl'] = 'https://dl.hojrehdar.com/uploads';
     }

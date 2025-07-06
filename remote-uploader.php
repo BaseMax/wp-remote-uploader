@@ -13,18 +13,21 @@ defined('ABSPATH') || exit;
 
 add_filter('upload_dir', 'remote_uploader_custom_upload_dir');
 function remote_uploader_custom_upload_dir($dirs) {
-    $subdir = $dirs['subdir'];
-    $basedir = $dirs['basedir'];
-    $baseurl = $dirs['baseurl'];
     $path = $dirs['path'];
-    $url = $dirs['url'];
+    $subdir = $dirs['subdir'];
+    
+    if (strpos($path, '/uploads/elementor/') !== false) {
+        return $dirs;
+    }
 
-    if (
-        preg_match('#/uploads/20\d{2}/#', $path) &&
-        strpos($path, '/elementor/') === false &&
-        strpos($path, '/cache/') === false &&
-        strpos($path, '/plugins/') === false
-    ) {
+    $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+    foreach ($backtrace as $call) {
+        if (!empty($call['class']) && strpos($call['class'], 'Elementor\\') === 0) {
+            return $dirs;
+        }
+    }
+
+    if (preg_match('#/uploads/20\d{2}/#', $path)) {
         $dirs['url']     = 'https://dl.hojrehdar.com/uploads' . $subdir;
         $dirs['baseurl'] = 'https://dl.hojrehdar.com/uploads';
     }

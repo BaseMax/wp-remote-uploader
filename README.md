@@ -36,9 +36,11 @@ https://example.com/wp-content/uploads/elementor/css/post-xxxx.css
 By default, FTP credentials are hardcoded in the plugin. To secure and externalize them, add the following constants in your `wp-config.php`:
 
 ```php
-define('HOJREHDAR_FTP_HOST', 'ftp.dl.example.com');
-define('HOJREHDAR_FTP_USERNAME', 'your_ftp_username');
-define('HOJREHDAR_FTP_PASSWORD', 'your_ftp_password');
+define('REMOTEUPLOADER_SUBDOMAIN_URL', 'https://dl.example.com/uploads');
+define('REMOTEUPLOADER_FTP_HOST', 'ftp.example.com');
+define('REMOTEUPLOADER_FTP_USERNAME', 'ftpuser');
+define('REMOTEUPLOADER_FTP_PASSWORD', 'ftppass');
+define('REMOTEUPLOADER_FTP_BASEDIR', '/domains/example.com/public_html/uploads');
 ````
 
 Replace `example.com` with your actual domain.

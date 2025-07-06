@@ -16,18 +16,14 @@ Upload WordPress media files directly to a remote FTP server (like a download ho
 Your WordPress media files (e.g., `/wp-content/uploads/2025/07/image.jpg`) will be served from:
 
 ```
-
-[https://dl.example.com/uploads/2025/07/image.jpg](https://dl.example.com/uploads/2025/07/image.jpg)
-
+https://dl.example.com/uploads/2025/07/image.jpg
 ```
 
 But Elementor-generated files (like `/uploads/elementor/css/post-xxxx.css`) remain untouched and are loaded from the main site:
 
 ```
-
-[https://example.com/wp-content/uploads/elementor/css/post-xxxx.css](https://example.com/wp-content/uploads/elementor/css/post-xxxx.css)
-
-````
+https://example.com/wp-content/uploads/elementor/css/post-xxxx.css
+```
 
 ## 🚀 Installation
 
@@ -52,14 +48,6 @@ Replace `example.com` with your actual domain.
 * Files uploaded under `/uploads/20xx/` are moved to the remote FTP.
 * Elementor-related uploads (containing `elementor` in path) are **excluded**.
 * Files are removed from the local server after successful transfer.
-
-## 🐞 Debugging
-
-To debug upload paths and see what is being rewritten, append `?log` to any admin page URL:
-
-```
-https://your-site.com/wp-admin/media-new.php?log
-```
 
 ## 🔒 Security Note
 
